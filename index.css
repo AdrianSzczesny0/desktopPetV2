@@ -1,0 +1,54 @@
+body{
+    width:100%;
+    height:100%;
+    background-color: red;
+}
+
+.pet{
+    position:absolute;
+    width:60px;
+    height:60px;
+}
+.pet:hover{
+    cursor:grab;
+}
+.idle{
+    background: transparent url("./poring_IDLE_sprite2.png") 0 0 no-repeat;
+    animation: idle 2s steps(28) infinite;
+}
+.dragged{
+    /* transform: scaleX(3); */
+    transform-origin: 50% 0%;
+    background: transparent url("./poring_DRAGGED_1.png") 0 0 no-repeat;
+    /* animation: dragged 2s steps(1) infinite; */
+}
+
+.left{
+    transform: scale(1,1);
+}
+.right{
+    transform: scale(-1,1);
+}
+
+@keyframes idle {
+    100% {
+        background-position: -1680px, 0;
+    }
+}
+@keyframes dragged {
+    0%{
+        transform:rotate(0deg);
+    }
+    25% {
+        transform:rotate(30deg);
+    }
+    50%{
+        transform:rotate(0deg);
+    }
+    75%{
+        transform: rotate(-30deg);
+    }
+    100%{
+        transform:rotate(0deg);
+    }
+}
