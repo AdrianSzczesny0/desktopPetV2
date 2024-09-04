@@ -16,6 +16,10 @@ body{
     background: transparent url("./poring_IDLE_sprite2.png") 0 0 no-repeat;
     animation: idle 2s steps(28) infinite;
 }
+.walk{
+    background: transparent url("./poring_WALK_1.png") 0 0 no-repeat;
+    animation: walk 1s steps(11) infinite;
+}
 .dragged{
     /* transform: scaleX(3); */
     transform-origin: 50% 0%;
@@ -33,6 +37,19 @@ body{
 @keyframes idle {
     100% {
         background-position: -1680px, 0;
+    }
+}
+@keyframes walk {
+    0%{
+        /* transform-origin: 50% 100%; */
+    }
+    50%{
+        /* top:20px; */
+    }
+    100% {
+        /* transform-origin: 50% 100%; */
+        /* transform: translate(0px,0px); */
+        background-position: -660px, 0;
     }
 }
 @keyframes dragged {

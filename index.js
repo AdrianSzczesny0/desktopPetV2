@@ -38,7 +38,7 @@ petHtmlElement.addEventListener('mouseup' , ()=>{
     turnOffTImerIfPetUnclicked();
     isDragged = false;
     canDrag = false;
-    pet.state = STATE.IDLE;
+    pet.state = STATE.WALK;
 })
 
 function startTimerWhenPetClicked(){
@@ -64,6 +64,12 @@ function stateHandler(){
         case STATE.IDLE:
             petHtmlElement.classList.add('idle');
             petHtmlElement.classList.remove('walk');
+            petHtmlElement.classList.remove('dragged');
+            break;
+
+        case STATE.WALK:
+            petHtmlElement.classList.add('walk');
+            petHtmlElement.classList.remove('idle');
             petHtmlElement.classList.remove('dragged');
             break;
         default:
