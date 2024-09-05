@@ -8,6 +8,8 @@ body{
     position:absolute;
     width:60px;
     height:60px;
+    z-index: 4;
+    opacity: 0.9;
 }
 .pet:hover{
     cursor:grab;
@@ -33,6 +35,55 @@ body{
 .right{
     transform: scale(-1,1);
 }
+.shadow{
+    position:absolute;
+    pointer-events: none;
+    filter: blur(5px);
+    transform: scaleY(0.6);
+    width:40px;
+    height: 40px;
+    border-radius: 50% 50%;
+    background-color: rgba(0, 0, 0, 0.301);
+    z-index: 0;
+}
+
+
+.tpContainer{
+    position: absolute;
+    width:50px;
+    height:100px;
+    background-color: white;
+}
+.teleBottom{
+    position:absolute;
+    pointer-events: none;
+    /* filter: blur(5px); */
+    transform: scaleY(0.6);
+    width:40px;
+    height: 40px;
+    bottom:-10px;
+    left:4px;
+    border-radius: 50% 50%;
+    background-color: rgba(82, 150, 195, 0.935);
+    z-index: 1;
+}
+.teleSmear1{
+    opacity:0;
+    background: transparent url("./tpSmear1.png") 0 0 no-repeat;
+    animation: teleSmear1 1s steps(1) infinite;
+}
+@keyframes tpBottom {
+    100% {
+        opacity:1;
+    }
+}
+
+@keyframes teleSmear1 {
+    100% {
+        transform: scaleY(3);
+    }
+}
+
 
 @keyframes idle {
     100% {

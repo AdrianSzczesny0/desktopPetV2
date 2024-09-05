@@ -4,5 +4,6 @@ export const STATE ={
     IDLE:"IDLE",
     WALK:"WALK",
     DRAGGED:"DRAGGED",
-    FALL:"FALL"
+    FALL:"FALL",
+    ROLL:"ROLL"
 }
