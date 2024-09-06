@@ -1,15 +1,13 @@
 body{
     width:100%;
     height:100%;
-    /* background-color: red; */
 }
 
 .pet{
     position:absolute;
     width:60px;
     height:60px;
-    z-index: 4;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 .pet:hover{
     cursor:grab;
@@ -31,10 +29,8 @@ body{
     animation: walk 0.25s steps(11) infinite;
 }
 .dragged{
-    /* transform: scaleX(3); */
     transform-origin: 50% 0%;
     background: transparent url("./poring_DRAGGED_1.png") 0 0 no-repeat;
-    /* animation: dragged 2s steps(1) infinite; */
 }
 
 .left{
@@ -55,7 +51,6 @@ body{
     z-index: 0;
 }
 
-
 .tpContainer{
     position: absolute;
     width:50px;
@@ -65,7 +60,6 @@ body{
 .teleBottom{
     position:absolute;
     pointer-events: none;
-    /* filter: blur(5px); */
     transform: scaleY(0.6);
     width:40px;
     height: 40px;
@@ -80,6 +74,27 @@ body{
     background: transparent url("./tpSmear1.png") 0 0 no-repeat;
     animation: teleSmear1 1s steps(1) infinite;
 }
+.poporing{
+    filter:hue-rotate(88deg);
+}
+.drops{
+    filter:hue-rotate(18deg);
+}
+.marine{
+    filter:hue-rotate(234deg);
+}
+.aquaring{
+    filter:hue-rotate(182deg);
+}
+
+@keyframes rainbow{
+    0% {
+        filter:hue-rotate(0deg);
+    }
+    99%{
+        filter:hue-rotate(359deg);
+    }
+}
 @keyframes tpBottom {
     100% {
         opacity:1;
@@ -91,7 +106,6 @@ body{
         transform: scaleY(3);
     }
 }
-
 
 @keyframes idle {
     100% {

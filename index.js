@@ -1,35 +1,43 @@
-import { Pet } from "./pet.js";
-import { STATE } from "./state.js";
+const electron = require("electron");
+const ipc = electron.ipcRenderer;
+import { addDragEventListener, createMultiplePets, update } from "./utility.js";
 
-const pet = new Pet(100,100,2);
-const pet2 = new Pet(200,200,3);
 const mousePosition = {
     x:0,
     y:0
 }
 
+const petList = [];
 
 onmousemove = function (e) {
     mousePosition.x = e.clientX;
     mousePosition.y = e.clientY;
 }
 
-pet.petElement.addEventListener('mousedown' , ()=>{
-    pet.isPetClicked = true;
-    console.log('pet clicked');
-})
+function checkIfInteractibleElementHovered(){
+    let interactibleElementsHovered = 0;
+    petList.forEach(pet => {
+        if(mousePosition.x>= pet.x+5 && mousePosition.x<= pet.x+pet.width-5){
+            if(mousePosition.y>= pet.y+5 && mousePosition.y<= pet.y+pet.height-5){
+                interactibleElementsHovered++;
+            }
+        }
+        if(interactibleElementsHovered > 0){
+            console.log('OVER ENTITY');
+            ipc.send('hover-on');
+        }else{
+            console.log('NO ENTITY BELOW');
+            ipc.send('hover-off');
+        }
+    });
+}
 
-pet.petElement.addEventListener('mouseup' , ()=>{
-    pet.turnOffTImerIfPetUnclicked();
-    pet.canDrag = false;
-    pet.state = STATE.ROLL;
-})
+createMultiplePets(petList,2);
+addDragEventListener(petList);
 
 function animate(){
-    pet.giveMousePosition(mousePosition);
-    pet2.giveMousePosition(mousePosition);
-    pet.update();
-    pet2.update();
+    checkIfInteractibleElementHovered();
+    update(petList,mousePosition);
     requestAnimationFrame(animate);
 }
 animate();

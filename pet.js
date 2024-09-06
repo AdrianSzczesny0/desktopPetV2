@@ -1,14 +1,15 @@
 import { DIRECTION } from "./direction.js";
 import { createHTML, poring, shadow } from "./html.js";
+import { PORING_TYPE } from "./poringType.js";
 import { STATE } from "./state.js";
 
 
 export class Pet{
-    constructor(startingX,startingY,moveSpeed){
+    constructor(startingX,startingY,moveSpeed,type){
         this.x = startingX;
         this.y = startingY;
-        this.width = 50;
-        this.height = 50;
+        this.width = 60;
+        this.height = 60;
         this.state = STATE.IDLE;
         this.direction = DIRECTION.LEFT;
         this.moveSpeed = moveSpeed;
@@ -38,8 +39,15 @@ export class Pet{
             x:0,
             y:0
         }
+        this.type = type;
+        this.setType = true;
+        this.isRainbowring;
+        this.hue = 0;
     }
 
+    setZindex(){
+        this.petElement.style.zIndex = `${this.y}`;
+    }
     forceTeleportToScreenCenter(){
         if(this.x<=0 || this.x >= window.innerWidth || this.y <= 0 || this.y>= window.innerHeight){
             this.x = window.innerWidth/2;
@@ -55,7 +63,6 @@ export class Pet{
     startTimerWhenPetClicked(){
         if(this.isPetClicked){
             this.timer.click_drag++;
-            console.log(`drag timer:${this.timer.click_drag}`);
         }
     }
 
@@ -95,9 +102,7 @@ export class Pet{
     }
 
     rollStepAmount(){
-        // console.log('Rolling amount of steps');
         this.durations.steps = Math.floor(Math.random()*6);
-        // console.log(`STEPS ROLLED: ${this.durations.steps}`);
     }
 
     rollDirection(){
@@ -316,7 +321,6 @@ export class Pet{
             default:
                 break;
         }
-        console.log(this.state);
     }
 
     dragHandler(){
@@ -330,7 +334,48 @@ export class Pet{
         this.moveSpeedHandler();
     }
 
+    rainbowringUpdate(){
+        if(this.isRainbowring){
+            this.hue+=4;
+            if(this.hue>360){
+                this.hue = 0;
+            }
+            this.petElement.style.filter = `hue-rotate(${this.hue}deg)`;
+        }
+    }
+
+    setPoringType(){
+        switch (this.type) {
+            case 'poring':
+                //pass
+                break;
+            case 'drops':
+                this.petElement.classList.add('drops');
+                break;
+            case 'poporing':
+                this.petElement.classList.add('poporing');
+                break;
+            case 'marine':
+                this.petElement.classList.add('marine');
+                break;
+            case 'aquaring':
+                this.petElement.classList.add('aquaring');
+                break;
+            case 'rainbowring':
+                this.isRainbowring = true;
+                break;
+            default:
+                break;
+        }
+    }
     update(){
+        if(this.setType){
+            this.setPoringType();
+            this.setType = false;
+        }
+        this.rainbowringUpdate();
+        
+        this.setZindex();
         if(this.changeMoveSpeed){
             this.moveSpeedHandler();
         }
