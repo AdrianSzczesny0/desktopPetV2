@@ -8,6 +8,7 @@ const mousePosition = {
 }
 
 const petList = [];
+const uiElement = [];
 
 onmousemove = function (e) {
     mousePosition.x = e.clientX;
@@ -23,16 +24,14 @@ function checkIfInteractibleElementHovered(){
             }
         }
         if(interactibleElementsHovered > 0){
-            console.log('OVER ENTITY');
             ipc.send('hover-on');
         }else{
-            console.log('NO ENTITY BELOW');
             ipc.send('hover-off');
         }
     });
 }
 
-createMultiplePets(petList,2);
+createMultiplePets(petList,4);
 addDragEventListener(petList);
 
 function animate(){

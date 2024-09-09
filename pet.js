@@ -1,11 +1,9 @@
 import { DIRECTION } from "./direction.js";
 import { createHTML, poring, shadow } from "./html.js";
-import { PORING_TYPE } from "./poringType.js";
 import { STATE } from "./state.js";
-
-
 export class Pet{
     constructor(startingX,startingY,moveSpeed,type){
+        this.walk_sound = new Audio('./audio/poring_walk.wav');
         this.x = startingX;
         this.y = startingY;
         this.width = 60;
@@ -43,6 +41,16 @@ export class Pet{
         this.setType = true;
         this.isRainbowring;
         this.hue = 0;
+        this.shouldPlaySound = false;
+    }
+
+    playWalkSound(startFrame){
+        console.log('playing sound');
+        console.log(this.state);
+        if(this.timer.walk == startFrame && this.timer.walk !=0){
+            this.walk_sound.volume = 0.01;
+            this.walk_sound.play();
+        }
     }
 
     setZindex(){
@@ -227,9 +235,11 @@ export class Pet{
 
             case 2:
                 this.durations.moveSpeed = 20;
+                this.durations.walk = 60;
                 break;
             case 3:
                 this.durations.moveSpeed = 7;
+                this.durations.walk = 20;
                 break;
             default:
                 break;
@@ -240,7 +250,6 @@ export class Pet{
             case 1:
                 this.petElement.classList.add('walkSpeed1');
                 break;
-
             case 2:
                 this.petElement.classList.add('walkSpeed2');
                 break;
@@ -304,12 +313,16 @@ export class Pet{
 
             case STATE.WALK:
                 this.movePet();
+                
                 this.petElement.classList.add('walk');
                 this.setMoveSpeedAnimation();
                 this.petElement.classList.remove('idle');
                 this.petElement.classList.remove('dragged');
                 this.timer.walk++;
-                if(this.timer.walk>this.durations.walk){
+                this.playWalkSound(1);
+
+                if(this.timer.walk>this.durations.walk){    
+                    console.log(`steps: ${this.steps}`);
                     this.timer.steps +=1;
                     this.timer.walk = 0;
                     if(this.timer.steps>= this.durations.steps){
@@ -369,6 +382,7 @@ export class Pet{
         }
     }
     update(){
+
         if(this.setType){
             this.setPoringType();
             this.setType = false;

@@ -3,9 +3,10 @@
     "version": "1.0.0",
     "main": "main.js",
     "devDependencies": {
-        "electron": "^32.0.1"
+        "electron": "^32.0.1",
+        "howler": "^2.2.4"
     },
-    "scripts":{
-        "start":"electron ."
+    "scripts": {
+        "start": "electron ."
     }
 }

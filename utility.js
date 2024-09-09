@@ -45,7 +45,7 @@ export function createMultiplePets(list, amount){
         let type = getPoringType();
         let randomX = Math.floor(Math.random() * (window.innerWidth - 100) + 100); 
         let randomY = Math.floor(Math.random() * (window.innerHeight - 100) + 100); 
-        let randomSpeed = Math.floor(Math.random() * (3 - 1) + 1); 
+        let randomSpeed = Math.floor(Math.random() * (2 - 1) + 1); 
         const pet  = new Pet(randomX,randomY,randomSpeed,type);
         list.push(pet);
     }

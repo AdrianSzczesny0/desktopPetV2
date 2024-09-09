@@ -24,6 +24,7 @@ function createWindow(){
         protocol:"file",
         slashes:true
     }));
+    // win.webContents.openDevTools();
     win.setIgnoreMouseEvents(true , {forward:true});
     win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
     win.setAlwaysOnTop(true, 'screen-saver', 1);  
