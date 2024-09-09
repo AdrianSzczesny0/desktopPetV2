@@ -1,15 +1,13 @@
 body{
     width:100%;
     height:100%;
-    background-color: red;
 }
 
 .pet{
     position:absolute;
     width:60px;
     height:60px;
-    z-index: 4;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 .pet:hover{
     cursor:grab;
@@ -20,13 +18,19 @@ body{
 }
 .walk{
     background: transparent url("./poring_WALK_1.png") 0 0 no-repeat;
+}
+.walkSpeed1{
     animation: walk 1s steps(11) infinite;
 }
+.walkSpeed2{
+    animation: walk 0.5s steps(11) infinite;
+}
+.walkSpeed3{
+    animation: walk 0.25s steps(11) infinite;
+}
 .dragged{
-    /* transform: scaleX(3); */
     transform-origin: 50% 0%;
     background: transparent url("./poring_DRAGGED_1.png") 0 0 no-repeat;
-    /* animation: dragged 2s steps(1) infinite; */
 }
 
 .left{
@@ -43,10 +47,9 @@ body{
     width:40px;
     height: 40px;
     border-radius: 50% 50%;
-    background-color: rgba(0, 0, 0, 0.301);
+    background-color: rgba(0, 0, 0, 0.629);
     z-index: 0;
 }
-
 
 .tpContainer{
     position: absolute;
@@ -57,7 +60,6 @@ body{
 .teleBottom{
     position:absolute;
     pointer-events: none;
-    /* filter: blur(5px); */
     transform: scaleY(0.6);
     width:40px;
     height: 40px;
@@ -72,6 +74,27 @@ body{
     background: transparent url("./tpSmear1.png") 0 0 no-repeat;
     animation: teleSmear1 1s steps(1) infinite;
 }
+.poporing{
+    filter:hue-rotate(88deg);
+}
+.drops{
+    filter:hue-rotate(18deg);
+}
+.marine{
+    filter:hue-rotate(234deg);
+}
+.aquaring{
+    filter:hue-rotate(182deg);
+}
+
+@keyframes rainbow{
+    0% {
+        filter:hue-rotate(0deg);
+    }
+    99%{
+        filter:hue-rotate(359deg);
+    }
+}
 @keyframes tpBottom {
     100% {
         opacity:1;
@@ -84,22 +107,13 @@ body{
     }
 }
 
-
 @keyframes idle {
     100% {
         background-position: -1680px, 0;
     }
 }
 @keyframes walk {
-    0%{
-        /* transform-origin: 50% 100%; */
-    }
-    50%{
-        /* top:20px; */
-    }
     100% {
-        /* transform-origin: 50% 100%; */
-        /* transform: translate(0px,0px); */
         background-position: -660px, 0;
     }
 }
